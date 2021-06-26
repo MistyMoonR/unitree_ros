@@ -23,7 +23,6 @@ int main(int argc, char **argv)
     // coord def_frame = coord::ROBOT; 
     coord def_frame = coord::TEST; 
 
-
     ros::init(argc, argv, "move_publisher");
     ros::NodeHandle nh;
     ros::Publisher move_publisher = nh.advertise<gazebo_msgs::ModelState>("/gazebo/set_model_state", 1000);
@@ -83,7 +82,7 @@ int main(int argc, char **argv)
             loop_rate.sleep();
         }
     }
-    
+
     // 测试API 部分
         else if(def_frame == coord::TEST)
     {
