@@ -1,6 +1,7 @@
 <launch>
+    <!--这里修改默认机器为A1-->
     <arg name="wname" default="earth"/>
-    <arg name="rname" default="laikago"/>
+    <arg name="rname" default="a1"/>  
     <arg name="robot_path" value="(find $(arg rname)_description)"/>
     <arg name="dollar" value="$"/>
 

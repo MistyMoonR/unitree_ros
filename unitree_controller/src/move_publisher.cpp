@@ -8,14 +8,21 @@
 #include <math.h>
 #include <iostream>
 
+// 增加TEST组件，用于测试
+
 int main(int argc, char **argv)
 {
     enum coord
     {
         WORLD,
-        ROBOT
+        ROBOT,
+        TEST
     };
-    coord def_frame = coord::WORLD;
+    // Github 这里是模式切换， 后续可以加个遥控器/键盘判断用于切换模式
+    // coord def_frame = coord::WORLD;
+    // coord def_frame = coord::ROBOT; 
+    coord def_frame = coord::TEST; 
+
 
     ros::init(argc, argv, "move_publisher");
     ros::NodeHandle nh;
@@ -74,6 +81,35 @@ int main(int argc, char **argv)
         {
             move_publisher.publish(model_state_pub);
             loop_rate.sleep();
+        }
+    }
+    
+    // 测试API 部分
+        else if(def_frame == coord::TEST)
+    {
+        // model_state_pub.twist.linear.x= 0.5; //0.02: 2cm/sec
+        // model_state_pub.twist.linear.y= 0.0;
+        // model_state_pub.twist.linear.z= 0.0;
+        model_state_pub.pose.position.x = 0.00;
+        model_state_pub.pose.position.y = 0.0;
+        model_state_pub.pose.position.z = 0.0;
+        
+        model_state_pub.twist.angular.x= 0.0;
+        model_state_pub.twist.angular.y= 0.0;
+        model_state_pub.twist.angular.z= 0.0;
+
+        model_state_pub.reference_frame = "base";
+
+        long long time_ms = 0;  //time, ms
+        while(ros::ok())
+        {
+            model_state_pub.pose.position.x = 0.001;
+            model_state_pub.pose.position.y = 0.001;
+            // model_state_pub.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, - 2*M_PI*(double)time_ms/period);
+
+            move_publisher.publish(model_state_pub);
+            loop_rate.sleep();
+            time_ms += 1;
         }
     }
     
