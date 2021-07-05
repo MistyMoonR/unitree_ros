@@ -7,10 +7,12 @@ Rviz 没找到能离线的地方，而且和Gazebo没链接。
 Gazebo里面一堆API没解释 
 基本要自己造轮子    
 
-目前两种思路：      
-* 直接扬了unitree的ROS，用unitree_legged_sdk和部分urdf包另寻其他控制方式 (没找到合适的开源控制)       
+思路：      
+* --直接扬了unitree的ROS，用unitree_legged_sdk和部分urdf包另寻其他控制方式 (没找到合适的开源控制)--       
 
-* 继续看unitree_ros并完善
+* 继续看unitree_ros并完善，urdf包没法用，害
+
+* 只能用unitree_legged_msgs和unitree_legged_real, 其他都要 自己想办法造轮子
 
 Here are the ROS packages of Unitree robots, namely Laikago, Aliengo and A1. You can load robots and joint controllers in Gazebo, so you can do low-level control(control the torque, position and angular velocity) on the robot joints. Please watch out that the Gazebo simulation cannot do high-level control, namely walking. Besides of these simulation functions, you can also control your real robots in ROS by the `unitree_legged_real`. For real robots, you can do high-level and low-level control by our ROS packages.
 
